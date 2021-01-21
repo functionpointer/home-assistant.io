@@ -14,80 +14,9 @@ The [MySensors](https://www.mysensors.org) project combines devices like Arduino
 
 ## Configuration
 
-Integrate your Serial, Ethernet (LAN) or MQTT MySensors Gateway by adding the following to your `configuration.yaml` file:
+To integrate your Serial, Ethernet (LAN) or MQTT MySensors Gateway, go to **Configuration** >> **Integrations** in the UI, click the button with `+` sign and from the list of integration select **MySensors**
 
-```yaml
-# Example configuration.yaml entry
-mysensors:
-  gateways:
-    - device: '/dev/ttyUSB0'
-```
 
-{% configuration %}
-  gateways:
-    description: A list of gateways to set up.
-    required: true
-    type: map
-    keys:
-      device:
-        description: The path to the serial gateway where it is connected to your Home Assistant host, or the address of the TCP Ethernet gateway, or `mqtt` to setup the MQTT gateway. Resolving DNS addresses is theoretically supported but not tested.
-        required: true
-        type: string
-      baud_rate:
-        description: Specifies the baud rate of the connected serial gateway.
-        required: false
-        type: integer
-        default: 115200
-      persistence_file:
-        description: The path to a file to save sensor information. The file extension determines the file type. Currently supported file types are 'pickle' and 'json'.
-        required: false
-        type: string
-        default: path/to/config/directory/mysensors.pickle
-      tcp_port:
-        description: Specifies the port of the connected TCP Ethernet gateway.
-        required: false
-        type: integer
-        default: 5003
-      topic_in_prefix:
-        description: Set the prefix of the MQTT topic for messages coming from the MySensors gateway in to Home Assistant.
-        required: false
-        type: string
-        default: ''
-      topic_out_prefix:
-        description: Set the prefix of the MQTT topic for messages going from Home Assistant out to the MySensors gateway.
-        required: false
-        type: string
-        default: ''
-      nodes:
-        description: A mapping of node ids to node settings, e.g.,  custom name.
-        required: false
-        type: map
-        keys:
-          name:
-            description: The name the node will be renamed to. This node name becomes part of the entity_id. Default entity_id is [sketch_name]\_[node_id]\_[child_id] and when this name is set, the entity_id becomes [name]\_[child_id].
-            required: true
-            type: string
-  persistence:
-    description: Enable or disable local persistence of sensor information. If this is disabled, then each sensor will need to send presentation messages after Home Assistant starts.
-    required: false
-    type: integer
-    default: true
-  version:
-    description: Specifies the MySensors protocol version to use. Supports versions 1.4 to 2.3.
-    required: false
-    type: string
-    default: '1.4'
-  optimistic:
-    description: Enable or disable optimistic mode for actuators (switch/light). Set this to true if no state feedback from actuators is possible. Home Assistant will assume that the command succeeded and change state.
-    required: false
-    type: integer
-    default: false
-  retain:
-    description: Enable or disable retain flag for published messages from Home Assistant when using the MQTT gateway.
-    required: false
-    type: integer
-    default: true
-{% endconfiguration %}
 
 <div class='note'>
 Not all features of MySensors 2.x are supported by Home Assistant yet. As more features are added, they will be described here in the documentation. Go to the MySensors platform pages under "related components" to see what message types are currently supported.
